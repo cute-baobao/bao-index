@@ -1,0 +1,17 @@
+@import "tailwindcss";
+:root {
+  font-size: 16px;
+  box-sizing: border-box;
+}
+
+
+body {
+   font-family: "WenQuanYi Bitmap Song 12px";
+   font-weight: normal;
+}
+
+
+*,*::after,*::before {
+  box-sizing: inherit;
+}
+
