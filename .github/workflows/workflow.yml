@@ -1,4 +1,3 @@
-// workflows/pages.yml
 name: Deploy Pages
 
 on:
