@@ -7,24 +7,29 @@ import initCheck from "../utils/initCheck";
 onMounted(() => {
     list.value = initCheck();
 });
-
+const init = ref(true)
 const emits = defineEmits(["update"]);
 const list = ref<WebItemProps[]>([]);
 const active = ref<boolean>(false);
 const item = ref<WebItemProps>({
+    id:"",
     title: "",
     url: "",
     icon: "",
 });
+
 const changeState = () => {
     active.value = !active.value;
 };
 const addItem = () => {
-    console.log(item.value);
+    item.value.id = Date.now().toString();
     list.value = [...list.value, item.value];
-    item.value = { title: "", url: "", icon: "" };
+    item.value = { id:"",title: "", url: "", icon: "" };
     active.value = false;
 };
+const removeItem = (id:string) => {
+    list.value = list.value.filter((item) => item.id !== id);
+}
 const exportJson = () => {
   // 将 JSON 数据转换为字符串
   const jsonString = JSON.stringify(list.value, null, 4); // 使用缩进格式化 JSON
@@ -45,14 +50,24 @@ const exportJson = () => {
   // 释放对象 URL
   URL.revokeObjectURL(downloadUrl);
 }
+
 watch(
     () => list.value,
     (newValue) => {
+        if(init.value) {
+            // 防止onMounted赋值给 list 触发index页面的更新 浪费性能
+            init.value = false;
+            return
+        }
+        console.log(list.value)
         localStorage.setItem("webItem", JSON.stringify(newValue));
         emits("update");
     }
 );
+
+defineExpose({removeItem})
 </script>
+
 <template>
     <div class="" :class="{ mode: active }">
         <div class="absolute top-5 right-8 flex items-center gap-4">
@@ -130,18 +145,20 @@ watch(
         </div>
     </div>
 </template>
+
 <style scoped>
 @reference "tailwindcss";
 .cover {
     position: absolute;
     inset: 0;
+    z-index: 10;
     background: rgba(0, 0, 0, 0.5);
     backdrop-filter: blur(0.5em);
 }
 .dialog {
     @apply w-[40svw] h-fit bg-gradient-to-b from-zinc-300 to-zinc-200 absolute 
     top-[30%] left-[50%] translate-x-[-50%] translate-y-[-30%]
-    rounded-[.5em] shadow-sm py-4;
+    rounded-[.5em] shadow-sm py-4 z-100;
 }
 .close {
     @apply absolute right-2 top-2 size-8
