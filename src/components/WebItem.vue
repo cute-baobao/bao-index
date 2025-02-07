@@ -8,7 +8,7 @@ const removeItem = () => {
 }
 </script>
 <template>
-    <div class="base">
+    <div class="base" :class="[`${props.colors}`]">
         <a class=" flex flex-col items-center hover:scale-[1.05]" :href="props.url">
             <Icon :icon="props.icon" class="size-10"/>
             <p class="text-xl line-clamp-1 font-medium">
@@ -24,17 +24,17 @@ const removeItem = () => {
 <style scoped> 
 @reference "tailwindcss";
 .base {
-    @apply  bg-[#FFA500] border-2 border-solid border-amber-500 rounded-sm 
+    @apply   border-2 border-solid  rounded-sm 
     px-2 py-4 flex items-center justify-center relative duration-200 transition-colors;
-}
-.base:hover {
-    @apply bg-amber-600/80;
 }
 .remove {
     @apply size-5 bg-red-500 rounded-full absolute -top-2 -right-2 gap-4 hidden items-center justify-center;
 }
 .base:hover .remove{
     display: flex;
+}
+.remove {
+    @apply shadow-md;
 }
 .remove:hover {
     @apply bg-red-600;

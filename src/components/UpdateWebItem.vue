@@ -69,19 +69,23 @@ defineExpose({removeItem})
 </script>
 
 <template>
-    <div class="" :class="{ mode: active }">
+    <div>
         <div class="absolute top-5 right-8 flex items-center gap-4">
+            <a href="https://github.com/cute-baobao/bao-index">
+                <Icon
+                    icon="openmoji:github"
+                    class="icon-btn"
+                />
+            </a>
             <Icon
                 @click="changeState"
                 icon="material-symbols:add"
-                class="size-6"
-                :class="['hover:scale-[1.1] hover:text-amber-300/80']"
+                class="icon-btn"
             />
             <Icon
-                @click="exportJson"
+                @click="exportJson" 
                 icon="uil:export"
-                class="size-6"
-                :class="['hover:scale-[1.1] hover:text-amber-300/80']"
+                class="icon-btn"
             />
         </div>
         <div class="cover" :class="[active ? '' : 'hidden']"></div>
@@ -175,5 +179,8 @@ defineExpose({removeItem})
 }
 .btn {
     @apply px-4 py-2 bg-blue-500 text-white rounded-md shadow-sm hover:bg-blue-600 cursor-pointer;
+}
+.icon-btn {
+    @apply size-6 hover:scale-[1.1] hover:text-amber-300/80 cursor-pointer;
 }
 </style>
