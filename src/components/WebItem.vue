@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { Icon } from "@iconify/vue"
-import type WebItemProps from '../type/webItemProps';
+import type WebItemProps from '@/type/webItemProps.d.ts';
 const props =  defineProps<WebItemProps>()
 const emits = defineEmits(['removeItem'])
 const removeItem = () => {

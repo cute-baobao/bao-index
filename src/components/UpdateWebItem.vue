@@ -1,8 +1,8 @@
 <script setup lang="ts">
 import { Icon } from "@iconify/vue";
 import { onMounted, ref, watch } from "vue";
-import type WebItemProps from "../type/webItemProps";
-import initCheck from "../utils/initCheck";
+import type WebItemProps from "@/type/webItemProps.d.ts";
+import initCheck from "@/utils/initCheck";
 
 onMounted(() => {
     list.value = initCheck();

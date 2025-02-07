@@ -1,9 +1,9 @@
 <script setup lang="ts">
 import { onMounted, ref } from "vue";
 import WebItem from "../components/WebItem.vue";
-import type WebItemProps from "../type/webItemProps";
-import UpdateWebItem from "../components/updateWebItem.vue";
-import initCheck from "../utils/initCheck";
+import type WebItemProps from "@/type/webItemProps.d.ts";
+import UpdateWebItem from "@/components/UpdateWebItem.vue";
+import initCheck from "@/utils/initCheck.ts";
 
 const itemList = ref<WebItemProps[]>([]);
 onMounted(() => {
